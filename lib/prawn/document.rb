@@ -257,10 +257,10 @@ module Prawn
       page_options = {:size => options[:size] || last_page_size,
                       :layout  => options[:layout] || last_page_layout,
                       :margins => last_page_margins}
-      if last_page
-        new_graphic_state = last_page.graphic_state.dup  if last_page.graphic_state
+      if last_page && last_page.graphic_state
+        new_graphic_state = last_page.graphic_state.dup  
         #erase the color space so that it gets reset on new page for fussy pdf-readers
-        new_graphic_state.color_space = {} if new_graphic_state
+        new_graphic_state.color_space = {}
         page_options.merge!(:graphic_state => new_graphic_state)
       end
       merge_template_options(page_options, options) if options[:template]
